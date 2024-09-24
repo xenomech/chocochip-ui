@@ -20,7 +20,8 @@
     "lint:fix": "eslint ./src/ --fix",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "release": "standard-version"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,8 @@
     "@babel/preset-react": "^7.24.7",
     "@babel/preset-typescript": "^7.24.7",
     "@chromatic-com/storybook": "^1.9.0",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@eslint/js": "^9.11.1",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
@@ -68,5 +71,8 @@
   },
   "peerDependencies": {
     "react": ">=16.0.0"
+  },
+  "dependencies": {
+    "standard-version": "^9.5.0"
   }
 }
