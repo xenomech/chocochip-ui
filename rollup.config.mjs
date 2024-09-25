@@ -5,7 +5,10 @@ import dts from "rollup-plugin-dts";
 import postcss from "rollup-plugin-postcss";
 import packageJson from "./package.json" assert { type: "json" };
 import tailwindcss from "tailwindcss";
+
 import autoprefixer from "autoprefixer";
+import alias from "@rollup/plugin-alias";
+
 export default [
   {
     input: "src/index.ts",
@@ -31,9 +34,15 @@ export default [
         tsconfig: "./tsconfig.json",
         exclude: ["**/*.test.tsx", "**/*.test.ts", "**/*.stories.ts"],
       }),
+      alias({
+        resolve: [".jsx", ".js", ".ts", ".tsx", ".css", ".scss"],
+        entries: [{ find: "@", replacement: "./src" }],
+      }),
       postcss({
         plugins: [tailwindcss, autoprefixer],
+        extensions: [".css"],
         minimize: true,
+        inject: true,
       }),
     ],
     external: ["react", "react-dom", "react/jsx-runtime"],
