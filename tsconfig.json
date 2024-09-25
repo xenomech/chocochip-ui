@@ -21,6 +21,10 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "allowUnreachableCode": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": ".", // Add this line
+    "paths": { // Add this block
+      "@/*": ["src/*"],
+    }
   }
 }

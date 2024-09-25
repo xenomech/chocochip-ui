@@ -28,14 +28,22 @@ const config = [
         tsconfig: "./tsconfig.json",
         exclude: ["**/*.test.ts", "**/*.test.tsx", "**/*.stories.tsx"],
       }),
+      terser(),
+    ],
+  },
+  {
+    input: "src/styles/globals.css",
+    output: [{ file: "dist/styles.css", format: "esm" }],
+    plugins: [
       postcss({
-        extensions: [".css", ".scss"],
-        extract: false,
-        inject: true,
+        extract: true,
+        minimize: true,
+        modules: true,
       }),
       terser(),
     ],
   },
+
   {
     input: "dist/esm/types/index.d.ts",
     output: [{ file: packageJson.types, format: "esm" }],
