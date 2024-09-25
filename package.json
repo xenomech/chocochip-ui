@@ -30,6 +30,9 @@
   "bugs": {
     "url": "https://github.com/xenomech/chocochip-ui/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "homepage": "https://github.com/xenomech/chocochip-ui#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.25.4",
@@ -73,12 +76,10 @@
     "tailwindcss": "^3.4.13",
     "tslib": "^2.6.2",
     "typescript": "^5.3.3",
-    "typescript-eslint": "^8.7.0"
+    "typescript-eslint": "^8.7.0",
+    "standard-version": "^9.5.0"
   },
   "peerDependencies": {
     "react": ">=16.0.0"
-  },
-  "dependencies": {
-    "standard-version": "^9.5.0"
   }
 }
