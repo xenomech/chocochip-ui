@@ -5,7 +5,7 @@ name: chocochip-ui-npm-publish
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   build:
@@ -23,13 +23,14 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 20
-          registry-url: https://registry.npmjs.org/
+          version: 9
+          run_install: true
       - run: npm install -g pnpm
-      - run: pnpm install
-      - run: pnpm publish
+      - run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
