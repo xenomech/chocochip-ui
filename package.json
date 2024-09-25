@@ -23,9 +23,6 @@
     "prepare": "husky",
     "release": "standard-version"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/xenomech"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xenomech/chocochip-ui.git"
