@@ -1,12 +1,12 @@
 import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
+import commonjs from "@rollup/plugin-commonjs";
 import dts from "rollup-plugin-dts";
 import postcss from "rollup-plugin-postcss";
 import packageJson from "./package.json" assert { type: "json" };
-import terser from "@rollup/plugin-terser";
-
-const config = [
+import tailwindcss from "tailwindcss";
+import autoprefixer from "autoprefixer";
+export default [
   {
     input: "src/index.ts",
     output: [
@@ -22,34 +22,26 @@ const config = [
       },
     ],
     plugins: [
-      resolve(),
+      resolve({
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        skip: ["react", "react-dom"],
+      }),
       commonjs(),
       typescript({
         tsconfig: "./tsconfig.json",
-        exclude: ["**/*.test.ts", "**/*.test.tsx", "**/*.stories.tsx"],
+        exclude: ["**/*.test.tsx", "**/*.test.ts", "**/*.stories.ts"],
       }),
-      terser(),
-    ],
-  },
-  {
-    input: "src/styles/globals.css",
-    output: [{ file: "dist/styles.css", format: "esm" }],
-    plugins: [
       postcss({
-        extract: true,
+        plugins: [tailwindcss, autoprefixer],
         minimize: true,
-        modules: true,
       }),
-      terser(),
     ],
+    external: ["react", "react-dom", "react/jsx-runtime"],
   },
-
   {
-    input: "dist/esm/types/index.d.ts",
-    output: [{ file: packageJson.types, format: "esm" }],
+    input: "dist/esm/src/index.d.ts",
+    output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [dts()],
-    external: [/\.(css|scss)$/],
+    external: [/\.css$/],
   },
 ];
-
-export default config;
